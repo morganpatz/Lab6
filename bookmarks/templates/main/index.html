@@ -19,10 +19,10 @@
                 <div id="sidebar">
                     <ul>
                         <li class="active" id="home">
-                            <a href="link">My Links</a>
+                            <a href="#">My Links</a>
                         </li>
                         <li><a href="javascript:;" id="addLink">Add a link</a></li>
-                        <li><a href="tags">Tags</a></li>
+                        <li><a href="#">Tags</a></li>
                     </ul>
                 </div><!--
                 --><div id="content">
@@ -54,6 +54,7 @@
         <div class="popBackground">&nbsp;</div>
         <div class="popWindow">
             <form id="addForm" method="POST" action="/bookmarks/add_link/">
+		{% csrf_token %}
                 <div class="winHead">
                     <h2>Add a link</h2>
                 </div>

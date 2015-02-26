@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-{% csrf_token %}
 
 <html>
     <head>
@@ -20,10 +19,10 @@
                 <div id="sidebar">
                     <ul>
                         <li class="active" id="home">
-                            <a href="link">My Links</a>
+                            <a href="#">My Links</a>
                         </li>
                         <li><a href="javascript:;" id="addLink">Add a link</a></li>
-                        <li><a href="tags">Tags</a></li>
+                        <li><a href="#">Tags</a></li>
                     </ul>
                 </div><!--
                 --><div id="content">

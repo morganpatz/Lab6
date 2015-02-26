@@ -38,9 +38,13 @@ def add_link(request):
 		tags = request.POST.get("tags", "")
 		title = request.POST.get("title", "")
 		#TODO: Your code here!
-		#l = Link.objects.get_or_create(title=title, url=url)[0]
-    		#for tag in tags:
-        	#	l.tags.add(tag)
+		l = Link.objects.get_or_create(title=title, url=url)[0]
+    		for tag in tags:
+        		l.tags.add(tag)
 	return redirect(index)
+
+def add_tag(name):
+    t = Tag.objects.get_or_create(name=name)[0]
+    return t
 
 
