@@ -17,41 +17,47 @@
             <div id="main">
                 <div id="sidebar">
                     <ul>
-                        <li id="home"><a href="#">My Links</a>
+                        <li id="home">
+			    <a href="/bookmarks/">My Links</a>
+			    {% if tag_name %}
+				{{ tag_name }}
+			    {% endif %}
                         </li>
                         <li><a href="javascript:;" id="addLink">Add a link</a></li>
                         <li class="active"><a href="tags.html">Tags</a></li>
                     </ul>
                 </div><!--
                 --><div id="content">
-                    <div class="link">
-                        <h4><a href="http://www.google.com">Google</a></h4>
-                        <p class="tags">T
-                            <a href="#">tag1</a>
-                            <a href="#">tag2</a>
-                            <a href="#">tag3</a>
-                        </p>
-                    </div>
-                    <div class="link other">
-                        <h4><a href="http://www.facebook.com">Facebook</a></h4>
-                        <p class="tags">
-                            <a href="#">tag1</a>
-                        </p>
-                    </div>
-                    <div class="link">
-                        <h4><a href="http://www.twitter.com">Twitter</a></h4>
-                        <p class="tags">
-                            <a href="#">tag1</a>
-                            <a href="#">tag2</a>
-                        </p>
-                    </div>
+                    {% for tag in tags %}
+			<div class="link">
+			    <h4><a href="/bookmarks/tags/{{ tag.name }}">{{ tag.name }}</a></h4>
+			</div>
+		    {% endfor %}
                 </div>
             </div>
         </div>
+	
+	<div action="/bookmarks/tags/{{ tag.name }}">
+	    {% for link in links %}
+		{% for linktag in link.tag.all %}
+		    {% if linktag == tag.name %}
+			<div class="link">
+			    <h4><a href="{{ link.url }}">{{ link.title }}</a></h4>
+			    <p class="tags">
+				{% for tag in link.tags.all %}
+				    <a href="/bookmarks/tags/{{ tag.name }}/">{{tag.name}}</a>
+				{% endfor %}
+			    </p>
+			</div>
+		    {% endif %}
+		{% endfor %}
+	    {% endfor %}
+	</div>
 
         <div class="popBackground">&nbsp;</div>
         <div class="popWindow">
             <form id="addForm" method="POST" action="/bookmarks/add_link/">
+		{% csrf_token %}
                 <div class="winHead">
                     <h2>Add a link</h2>
                 </div>
@@ -71,3 +77,4 @@
         </div>
     </body>
 </html>
+
